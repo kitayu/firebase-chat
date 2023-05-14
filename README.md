@@ -31,3 +31,21 @@ $ vite
   ➜  Network: use --host to expose
   ➜  press h to show help
 ```
+
+
+## テスト実行手順
+エミュレーターを起動してから、テストを実行してください。
+
+### エミュレーターの起動
+```
+% yarn emulators:start:firestore
+```
+
+### テスト実行
+```
+% yarn test
+```
+
+### カバレッジの確認
+エミュレーターを起動した状態で、以下のURLにアクセスすることで確認できます。
+http://127.0.0.1:8080/emulator/v1/projects/firebase-chat-test:ruleCoverage.html

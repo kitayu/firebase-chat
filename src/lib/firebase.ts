@@ -1,4 +1,13 @@
 import { initializeApp } from 'firebase/app'
+import {
+	DocumentData,
+	FirestoreDataConverter,
+	PartialWithFieldValue,
+	QueryDocumentSnapshot,
+	SnapshotOptions,
+	Timestamp,
+} from 'firebase/firestore';
+import { omit } from 'lodash-es';
 
 const firebaseConfig = {
 	apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -10,3 +19,20 @@ const firebaseConfig = {
 };
 
 initializeApp(firebaseConfig);
+export type WithId<T> = T & { id: string };
+
+const getConverter = <T extends DocumentData>(): FirestoreDataConverter<WithId<T>> => ({
+	toFirestore: (
+		data: PartialWithFieldValue<WithId<T>>
+	): DocumentData => {
+		return omit(data, ['id'])
+	},
+	fromFirestore: (
+		snapshot: QueryDocumentSnapshot<T>,
+		options: SnapshotOptions,
+	): WithId<T> => {
+		return { id: snapshot.id, ...snapshot.data(options) };
+	}
+});
+
+export { Timestamp, getConverter };
