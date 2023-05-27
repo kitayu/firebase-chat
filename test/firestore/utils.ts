@@ -6,9 +6,9 @@ import { readFileSync } from 'fs';
 
 let testEnv: RulesTestEnvironment;
 
-export const initializeTestEnvironment = async () => {
+export const initializeTestEnvironment = async (projectId: string) => {
 	testEnv = await _initializeTestEnvironment({
-		projectId: 'firebase-chat-test',
+		projectId: projectId,
 		firestore: {
 			rules: readFileSync('firestore.rules', 'utf8'),
 		},
