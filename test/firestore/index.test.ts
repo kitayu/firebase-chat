@@ -6,7 +6,7 @@ process.env.FIRESTORE_EMULATOR_HOST = '127.0.0.1:8080'
 
 describe('firestore.rules', () => {
 	beforeAll(async () => {
-		await initializeTestEnvironment();
+		await initializeTestEnvironment('firebase-chat-test');
 	});
 
 	afterAll(async () => {
