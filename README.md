@@ -5,8 +5,20 @@
 Firebaseを使ったウェブアプリケーションです。
 
 ## 実行手順
-1. `yarn install`
-2. `yarn dev`
+1. プロジェクト直下に.env.development.localファイルを作成
+2. `yarn install`
+3. `yarn dev`
+
+.env.development.localのファイル内容
+```
+VITE_FIREBASE_API_KEY=xxxx
+VITE_FIREBASE_AUTH_DOMAIN=xxxx
+VITE_FIREBASE_PROJECT_ID=xxxx
+VITE_FIREBASE_STORAGE_BUCKET=xxxx
+VITE_FIREBASE_MESSAGING_SENDER_ID=xxxx
+VITE_FIREBASE_APP_ID=xxxx
+```
+設定する値については、Firebaseのプロジェクトページのプロジェクトの概要の横の歯車からプロジェクトの設定 > マイアプリ から確認できます。アプリがない場合は`</>`のアイコンをクリックしてアプリを登録してください。名前は好きな前で良いです。
 
 ```
 % yarn install

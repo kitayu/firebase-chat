@@ -55,7 +55,7 @@ export const messagesTest = () => {
 
 		it('createdAtの昇順にソートされたメッセージが取得できる', async () => {
 			const { getDocs } = await import('firebase/firestore');
-			const { messagesQuery } = await import ('@/lib/messages');
+			const { messagesQuery } = await import ('@/lib/message');
 			const snapshot = await getDocs(messagesQuery());
 			expect(snapshot.size).toEqual(3);
 			expect(

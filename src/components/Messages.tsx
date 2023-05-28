@@ -1,5 +1,5 @@
 import { useCollectionData } from "@/hooks/useCollectionData"
-import { messagesQuery } from "@/lib/messages"
+import { messagesQuery } from "@/lib/message"
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { Message } from "@/components/Message";
 
