@@ -34,5 +34,5 @@ describe('useUsers', () => {
 		});
 	});
 
-	const { result } = renderHook(() => useUsers(), { wrapper });
+	renderHook(() => useUsers(), { wrapper });
   });
