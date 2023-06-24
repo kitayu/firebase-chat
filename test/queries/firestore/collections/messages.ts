@@ -1,5 +1,5 @@
 import { RulesTestEnvironment } from '@firebase/rules-unit-testing';
-import { getTestEnv, setCollection } from '@/../test/firestore/utils';
+import { getTestEnv, setCollection } from '@/../test/utils';
 
 const getFirestoreMock = vi.fn();
 vi.mock('firebase/firestore', async () => {

@@ -5,7 +5,7 @@ import {
 	waitFor,
 } from '@testing-library/react'
 import { userFactory } from "@/../test/factories/user";
-import { messageFactory } from '../factories/message';
+import { messageFactory } from '@/../test/factories/message';
 import { Timestamp } from 'firebase/firestore';
 
 const sender = userFactory.build({
@@ -18,21 +18,26 @@ vi.mock('@/context/UsersContext', () => {
 		useUsers: { usersById: { 'user-id': [sender] }},
 	};
 });
+const useBlobMock = vi.fn();
+vi.mock('@/hooks/useBlob', () => {
+	return {
+		useBlob: useBlobMock,
+	};
+});
 
 describe('Message', async () => {
 	const { Message } = await import('@/components/Message');
 
-	afterEach(() => cleanup());
-
-	vi.mock('@/context/UsersContext', () => {
-		return {
-			useUsers: { usersById: { 'user-id': [sender] }}
-		};
+	beforeEach(() => {
+		useBlobMock.mockReturnValue({});
 	});
+
+	afterEach(() => cleanup());
 
 	const message = messageFactory.build({
 		content: 'テストのメッセージ',
 		senderId: 'user-id',
+		imagePath: null,
 		createdAt: Timestamp.fromDate(
 			new Date('2022-07-01 00:00:00+9:00')
 		),
@@ -70,6 +75,16 @@ describe('Message', async () => {
 		render(<Message message={message} />);
 		waitFor(() =>
 			expect(screen.getByText('テストのメッセージ')).toBeTruthy()
+		);
+	});
+
+	it('画像が表示される', () => {
+		render(<Message message={message} />);
+		waitFor(() =>
+			expect(screen.getByText('message-image')).toHaveAttribute(
+				'src',
+				'message-image-url'
+			)
 		);
 	});
 });

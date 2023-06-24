@@ -1,6 +1,6 @@
 import { messageFactory } from "@/../test/factories/message";
 import { userFactory } from "@/../test/factories/user";
-import { getTestEnv, setCollection } from "@/../test/firestore/utils";
+import { getTestEnv, setCollection } from "@/../test/utils";
 import {
 	RulesTestEnvironment,
 	assertFails,

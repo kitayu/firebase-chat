@@ -64,4 +64,50 @@ describe('MessageForm', async () => {
 		screen.getByText<HTMLButtonElement>('送信').click();
 		await waitFor(() => expect(input).toHaveValue(''));
 	});
+
+	it('画像入力欄が表示される', () => {
+		render(<MessageForm />);
+
+		expect(screen.getByLabelText('image-input')).toBeDefined();
+	});
+
+	it('画像添付の場合は画像も指定してメッセージ投稿処理が呼ばれる', async () => {
+		render(<MessageForm />);
+
+		const contentInput = screen.getByLabelText<HTMLInputElement>('content-input');
+		await act(() => userEvent.type(contentInput, 'てすとだよ'));
+
+		const imageInput = screen.getByLabelText<HTMLInputElement>('image-input');
+		const file = new File([], 'image.png', { type: 'image/png' });
+		await act(() => userEvent.upload(imageInput, file));
+
+		screen.getByText<HTMLButtonElement>('送信').click();
+
+		expect(addMessageMock).toBeCalledWith(
+			'てすとだよ',
+			file,
+			'test-user-uid'
+		);
+	});
+
+	it('送信完了後、メッセージ、画像入力欄がクリアされる', async() => {
+		render(<MessageForm />);
+
+		const contentInput = screen.getByLabelText<HTMLInputElement>('content-input');
+		await act(() => userEvent.type(contentInput, 'てすとだよ'));
+
+		const imageInput = screen.getByLabelText<HTMLInputElement>('image-input');
+		const file = new File([], 'image.png', { type: 'image/png' });
+		await act(() => userEvent.upload(imageInput, file));
+
+		expect(contentInput).toHaveValue('てすとだよ');
+		expect(imageInput.files?.[0]).toBe(file);
+
+		screen.getByText<HTMLButtonElement>('送信').click();
+
+		await waitFor(() => {
+			expect(contentInput).toHaveValue('');
+			expect(imageInput.files?.[0]).toBeUndefined();
+		});
+	});
 });

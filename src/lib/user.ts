@@ -1,5 +1,5 @@
 import { collection, doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
-import { getConverter, serverTimestamp } from "./firebase";
+import { getConverter, serverTimestamp } from "@/lib/firebase";
 import { UserDocumentData } from "@/types/user";
 
 export const usersRef = () => collection(

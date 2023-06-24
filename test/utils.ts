@@ -7,10 +7,16 @@ import { readFileSync } from 'fs';
 let testEnv: RulesTestEnvironment;
 
 export const initializeTestEnvironment = async (projectId: string) => {
+	process.env.FIRESTORE_EMULATOR_HOST = '127.0.0.1:8080';
+	process.env.FIREBASE_STORAGE_EMULATOR_HOST = '127.0.0.1:9199';
+
 	testEnv = await _initializeTestEnvironment({
 		projectId: projectId,
 		firestore: {
 			rules: readFileSync('firestore.rules', 'utf8'),
+		},
+		storage: {
+			rules: readFileSync('storage.rules', 'utf8'),
 		},
 	});	
 };

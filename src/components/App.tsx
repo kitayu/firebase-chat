@@ -1,5 +1,5 @@
-import { MessageForm } from "./MessageForm";
-import { Messages } from "./Messages";
+import { MessageForm } from "@/components/MessageForm";
+import { Messages } from "@/components/Messages";
 
 export const App = () => {
 	return (
