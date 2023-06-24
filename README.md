@@ -50,7 +50,7 @@ $ vite
 
 ### エミュレーターの起動
 ```
-% yarn emulators:start:firestore
+% yarn emulators:start
 ```
 
 ### テスト実行
@@ -60,4 +60,4 @@ $ vite
 
 ### カバレッジの確認
 エミュレーターを起動した状態で、以下のURLにアクセスすることで確認できます。
-http://127.0.0.1:8080/emulator/v1/projects/firebase-chat-test:ruleCoverage.html
+http://127.0.0.1:8080/emulator/v1/projects/firebase-chat-firestore-rules-test:ruleCoverage.html
