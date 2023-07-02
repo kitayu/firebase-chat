@@ -1,4 +1,4 @@
-import { Message } from '@/types/message';
+import { Message } from '@/shared/types/message';
 import { Timestamp } from 'firebase/firestore';
 import { Factory } from 'fishery';
 

@@ -1,6 +1,7 @@
 import { messagesTest } from "@/../test/rules/firestore/collections/message";
 import { usersTest } from "./collections/users";
 import { getTestEnv, initializeTestEnvironment } from "@/../test/utils";
+import { userSecretsTest } from "./collections/userSecrets";
 
 describe('firestore.rules', () => {
 	beforeAll(async () => {
@@ -17,4 +18,5 @@ describe('firestore.rules', () => {
 
 	usersTest();
 	messagesTest();
+	userSecretsTest();
 });

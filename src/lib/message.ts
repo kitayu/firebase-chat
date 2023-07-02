@@ -8,7 +8,7 @@ import {
 	setDoc,
 } from 'firebase/firestore';
 import { getConverter,	serverTimestamp } from '@/lib/firebase';
-import type { MessageDocumentData } from '@/types/message';
+import type { MessageDocumentData } from '@/shared/types/message';
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
 export const collectionName = 'messages';

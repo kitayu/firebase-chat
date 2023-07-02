@@ -1,4 +1,4 @@
-import { User } from '@/types/user';
+import { User } from '@/shared/types/user';
 import { Timestamp } from 'firebase/firestore';
 import { Factory } from 'fishery';
 

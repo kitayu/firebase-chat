@@ -16,6 +16,7 @@ import {
 	serverTimestamp as _serverTimestamp,
 } from 'firebase/firestore';
 import { omit } from 'lodash-es';
+import { getMessaging, getToken } from 'firebase/messaging';
 
 const firebaseConfig = {
 	apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -52,6 +53,10 @@ const signOut = async () => _signOut(getAuth());
 
 const serverTimestamp = _serverTimestamp as unknown as () => Timestamp;
 
+const getFcmToken = async () => getToken(getMessaging(), {
+	vapidKey: import.meta.env.VITE_FIREBAE_MESSAGING_VAPID_KEY,
+});
+
 export type {
 	User,
 	WithId,
@@ -63,4 +68,5 @@ export {
 	signInGoogleWithPopup,
 	signOut,
 	serverTimestamp,
+	getFcmToken,
 };
