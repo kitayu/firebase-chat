@@ -2,6 +2,7 @@
   "name": "firebase-chat",
   "private": true,
   "version": "0.0.0",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,7 +10,8 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "deploy": "yarn build && firebase deploy --except functions",
-    "test": "vitest run",
+    "deploy:rules": "firebase deploy --only firestore:rules,storage",
+    "test": "vitest run --dir test",
     "emulators:start": "firebase emulators:start --only firestore,storage"
   },
   "dependencies": {

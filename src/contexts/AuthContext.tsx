@@ -1,10 +1,11 @@
 import { User } from "firebase/auth"
 import { ReactNode, createContext, useCallback, useContext } from "react";
 import { useAuthState } from "@/hooks/useAuthState";
-import { signInGoogleWithPopup, signOut } from "@/lib/firebase";
+import { getFcmToken, signInGoogleWithPopup, signOut } from "@/lib/firebase";
 import { addUser, getUser } from "@/lib/user";
 import { LoginScreen } from "@/components/LoginScreen";
 import { LoadingScreen } from "@/components/LoadingScreen";
+import { setUserSecret } from "@/lib/userSecret";
 
 type AuthContextValue ={
 	currentUser: User | null;
@@ -36,8 +37,10 @@ export const useAuth = () => {
 	const signInWithGoogle = useCallback(async () => {
 		try {
 			const { user } = await signInGoogleWithPopup();
+			const fcmToken = await getFcmToken();
 			const { isExist } = await getUser(user.uid);
 			if ( !isExist ) await addUser(user);
+			await setUserSecret(user.uid, { fcmToken });
 		} catch (e) {
 			console.error(e);
 			await signOut();

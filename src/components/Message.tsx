@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { useUsers } from '@/contexts/UsersContext';
-import { Message as MessageType } from '@/types/message';
+import { Message as MessageType } from '@/shared/types/message';
 import { LoadingScreen } from '@/components/LoadingScreen';
 import { useBlob } from '@/hooks/useBlob';
 import nonameIcon from '@/images/noname.png';
