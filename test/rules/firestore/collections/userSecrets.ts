@@ -5,8 +5,8 @@ import {
 } from '@firebase/rules-unit-testing';
 import { getTestEnv, setCollection } from '@/../test/utils';
 import { userSecretFactory } from '@/../test/factories/userSecret';
+import { FirebaseFirestore } from '@firebase/firestore-types';
 import {
-	Firestore,
 	collection,
 	deleteDoc,
 	doc,
@@ -33,7 +33,7 @@ export const userSecretsTest = () => {
 		});
 
 		describe('未認証の場合', () => {
-			let db: Firestore;
+			let db: FirebaseFirestore;
 
 			beforeEach(() => {
 				db = env.unauthenticatedContext().firestore();
@@ -74,7 +74,7 @@ export const userSecretsTest = () => {
 			});
 
 			describe('自分のデータの場合', () => {
-				let db: Firestore;
+				let db: FirebaseFirestore;
 
 				beforeEach(() => {
 					db = env.authenticatedContext(userSecret.id).firestore();
@@ -105,7 +105,7 @@ export const userSecretsTest = () => {
 		});
 
 		describe('自分以外のデータの場合', async () => {
-			let db: Firestore;
+			let db: FirebaseFirestore;
 
 			beforeEach(() => {
 				db = env.authenticatedContext(userSecret.id).firestore();

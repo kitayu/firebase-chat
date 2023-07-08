@@ -7,7 +7,6 @@ import {
 	assertSucceeds
 } from "@firebase/rules-unit-testing";
 import {
-	Firestore,
 	addDoc,
 	collection,
 	deleteDoc,
@@ -17,6 +16,7 @@ import {
 	setDoc,
 	updateDoc
 } from "firebase/firestore";
+import { FirebaseFirestore } from '@firebase/firestore-types';
 
 const user = userFactory.build({ id: 'user-id' });
 const other = userFactory.build({ id: 'other-id' });
@@ -46,7 +46,7 @@ export const messagesTest = () => {
 	});
 
 	describe('未認証の場合', () => {
-		let db: Firestore;
+		let db: FirebaseFirestore;
 
 		beforeEach(() => {
 			db = env.unauthenticatedContext().firestore();
@@ -87,7 +87,7 @@ export const messagesTest = () => {
 		});
 
 		describe('自分のデータの場合', () => {
-			let db: Firestore;
+			let db: FirebaseFirestore;
 
 			beforeEach(() => {
 				db = env.authenticatedContext(user.id).firestore();
@@ -118,7 +118,7 @@ export const messagesTest = () => {
 		});
 
 		describe('自分以外のデータの場合', () => {
-			let db: Firestore;
+			let db: FirebaseFirestore;
 
 			beforeEach(() => {
 				db = env.authenticatedContext(user.id).firestore();
