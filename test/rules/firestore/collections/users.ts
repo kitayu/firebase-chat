@@ -1,7 +1,8 @@
 import { userFactory } from "@/../test/factories/user";
 import { getTestEnv, setCollection } from "@/../test/utils";
 import { RulesTestEnvironment, assertFails, assertSucceeds } from "@firebase/rules-unit-testing";
-import { Firestore, collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
+import { FirebaseFirestore } from '@firebase/firestore-types';
 
 const user = userFactory.build({ id: 'user-id' });
 const other = userFactory.build({ id: 'other-id' });
@@ -27,7 +28,7 @@ export const usersTest = () => {
 			});
 	
 			describe('自分のデータの場合', () => {
-				let db: Firestore;
+				let db: FirebaseFirestore;
 	
 				beforeEach(() => {
 					db = env.authenticatedContext(user.id).firestore();
@@ -57,7 +58,7 @@ export const usersTest = () => {
 			});
 	
 			describe('自分以外のデータの場合', () => {
-				let db: Firestore;
+				let db: FirebaseFirestore;
 	
 				beforeEach(() => {
 					db = env.authenticatedContext(user.id).firestore();

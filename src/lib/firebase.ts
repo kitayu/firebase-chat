@@ -4,7 +4,8 @@ import {
 	signInWithPopup,
 	signOut as _signOut,
 	User,
-	GoogleAuthProvider
+	GoogleAuthProvider,
+	connectAuthEmulator,
 } from 'firebase/auth';
 import {
 	DocumentData,
@@ -14,6 +15,8 @@ import {
 	SnapshotOptions,
 	Timestamp,
 	serverTimestamp as _serverTimestamp,
+	initializeFirestore,
+	connectFirestoreEmulator,
 } from 'firebase/firestore';
 import { omit } from 'lodash-es';
 import { getMessaging, getToken } from 'firebase/messaging';
@@ -27,7 +30,16 @@ const firebaseConfig = {
 	appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+if (import.meta.env.VITE_EMULATORS === 'true') {
+	console.info('USE EMULATORS...');
+	connectAuthEmulator(getAuth(), 'http://127.0.0.1:9099');
+	const firestore = initializeFirestore(app, {
+		experimentalForceLongPolling: true,
+	});
+	connectFirestoreEmulator(firestore, '127.0.0.1', 8080);
+}
+
 type WithId<T> = T & { id: string };
 
 const getConverter = <T extends DocumentData>(): FirestoreDataConverter<WithId<T>> => ({
